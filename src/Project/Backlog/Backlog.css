@@ -1,0 +1,47 @@
+details {
+    padding-top: 10px;
+}
+
+summary {
+    padding-bottom: 10px;
+}
+
+.droppable[open] summary ~ * {
+    animation: open 0.3s ease-in-out;
+}
+
+@keyframes open {
+    0% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
+}
+
+.createIssueArea {
+    margin-top: 16px;
+}
+
+.createIssueArea .createIssueGroupInput {
+    background: #fff;
+    padding: 0;
+    border: 1px solid #000
+}
+
+.createIssueArea .createIssueSelect {
+    width: 20%;
+    display: inline-block;
+}
+
+.createIssueArea .createIssueInput {
+    width: 80%;
+    outline: none;
+    border: none;
+    padding-left: 16px;
+}
+
+.hidden { 
+    display:none; 
+}

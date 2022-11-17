@@ -14,6 +14,9 @@ import IssueCreate from './IssueCreate';
 import ProjectSettings from './ProjectSettings';
 import Grantt from './Grantt';
 import { ProjectPage } from './Styles';
+import BurndownChart from './BurndownChart';
+import ProjectCreate from './ProjectCreate';
+import Backlog from './Backlog';
 
 const Project = () => {
   const match = useRouteMatch();
@@ -249,6 +252,21 @@ const Project = () => {
       <Route
         path={`${match.path}/grantt`}
         render={() => <Grantt/>}
+      />
+
+      <Route
+        path={`${match.path}/burndown-chart`}
+        render={() => <BurndownChart/>}
+      />
+
+      <Route
+        path={`${match.path}/project-create`}
+        render={() => <ProjectCreate/>}
+      />
+
+      <Route
+        path={`${match.path}/backlog`}
+        render={() => <Backlog/>}
       />
 
       {match.isExact && <Redirect to={`${match.url}/board`} />}

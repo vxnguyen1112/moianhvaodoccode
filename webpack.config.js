@@ -1,7 +1,7 @@
 const path = require('path');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-
+const Dotenv = require('dotenv-webpack');
 module.exports = {
   mode: 'development',
   entry: path.join(__dirname, 'src/index.jsx'),
@@ -49,5 +49,8 @@ module.exports = {
       template: path.join(__dirname, 'src/index.html'),
       favicon: path.join(__dirname, 'src/favicon.png'),
     }),
+    new Dotenv({
+      path: './.env' // default is .env
+    })
   ],
 };
