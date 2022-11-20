@@ -38,10 +38,20 @@ module.exports = {
     extensions: ['*', '.js', '.jsx'],
   },
   devtool: 'eval-source-map',
+  // devServer: {
+  //   contentBase: path.join(__dirname, 'dev'),
+  //   historyApiFallback: true,
+  //   hot: true,
+  // },
   devServer: {
-    contentBase: path.join(__dirname, 'dev'),
+    compress: true,
+    disableHostCheck: true,
     historyApiFallback: true,
-    hot: true,
+    headers: {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
+    "Access-Control-Allow-Headers": "X-Requested-With, content-type, Authorization"
+  }
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),

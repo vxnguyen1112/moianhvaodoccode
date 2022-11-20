@@ -1,16 +1,17 @@
 import axios from 'axios';
-
-import history from 'browserHistory';
 import toast from 'shared/utils/toast';
 import { objectToQueryString } from 'shared/utils/url';
 import { getStoredAuthToken, removeStoredAuthToken } from 'shared/utils/authToken';
 
 const defaults = {
-  baseURL: process.env.API_URL || 'http://localhost:3000',
+  baseURL: process.env.API_URL || 'http://146.190.91.243:8182',
   headers: () => ({
     'Content-Type': 'application/json',
-    Authorization: getStoredAuthToken() ? `Bearer ${getStoredAuthToken()}` : undefined,
+    Authorization: getStoredAuthToken()==="undefined"? '': `Bearer ${getStoredAuthToken()}`,
+    withCredentials: true,
+    'Access-Control-Allow-Credentials':true
   }),
+  
   error: {
     code: 'INTERNAL_ERROR',
     message: 'Something went wrong. Please check your internet connection or contact our support.',
@@ -33,16 +34,25 @@ const api = (method, url, variables) =>
         resolve(response.data);
       },
       error => {
-        if (error.response) {
-          if (error.response.data.error.code === 'INVALID_TOKEN') {
-            removeStoredAuthToken();
-            history.push('/authenticate');
-          } else {
-            reject(error.response.data.error);
-          }
-        } else {
-          reject(defaults.error);
-        }
+        
+        console.log('loi');
+        console.log(error.response.data);
+        console.log('loi1');
+        console.log(error.response.status);
+        console.log('loi2');
+        console.log(error.response.headers);
+        reject(error.response.data
+          );
+        // if (error.response) {
+        //   if (error.response.data.error.code === 'INVALID_TOKEN') {
+        //     removeStoredAuthToken();
+        //     history.push('/authenticate');
+        //   } else {
+        //     reject(error.response.data.error);
+        //   }
+        // } else {
+        //   reject(defaults.error);
+        // }
       },
     );
   });
