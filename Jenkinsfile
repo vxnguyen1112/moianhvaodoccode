@@ -14,6 +14,7 @@ pipeline {
           }
       }
       steps {
+        sh 'sudo npm install -g  --unsafe-perm=true --allow-root cypress'
         sh 'npm install'
         sh './test.sh'
       }
