@@ -1,27 +1,40 @@
 /* eslint-disable react/button-has-type */
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { FacebookLoginButton, InstagramLoginButton } from 'react-social-login-buttons';
-
+import toast from 'shared/utils/toast';
+import { getStoredAuthToken, storeAuthToken } from 'shared/utils/authToken';
+import api from 'shared/utils/api';
+import Authenticate from '../../Auth/Authenticate';
+import { async } from 'regenerator-runtime';
 const SignInForm = () => {
   const history = useHistory();
-  const [state,setState]=useState({ email:"", password:"" });
-  const handleChange= (event) =>  {
+  const [state, setState] = useState({ username: '', password: 'A123qwe@' });
+  const handleChange = event => {
     let target = event.target;
-    let value = target.type === "checkbox" ? target.checked : target.value;
+    let value = target.type === 'checkbox' ? target.checked : target.value;
     let name = target.name;
     setState(previousState => {
-      return { ...previousState, [name]: value }
+      return { ...previousState, [name]: value };
     });
-  }
-  const handleSubmit= (event) => {
+  };
+  const handleSubmit = async event => {
     event.preventDefault();
- 
-    console.log("The form was submitted with the following data:");
+
+    console.log('The form was submitted with the following data:');
     console.log(state);
-    history.push("/project");
-  }
+    try {
+      const  authToken   = await api.post('/api/auth/signin', JSON.stringify(state));
+      console.log(authToken);
+      toast.success('Logged in successfully');
+      history.push('/listproject');
+    } catch (error) {
+      console.log("error");
+      console.log(error);
+    }
+  
+  };
   return (
     // eslint-disable-next-line react/jsx-filename-extension
     <div className="formCenter">
@@ -31,12 +44,12 @@ const SignInForm = () => {
             E-Mail Address
           </label>
           <input
-            type="email"
-            id="email"
+            type="text"
+            id="username"
             className="formFieldInput"
-            placeholder="Enter your email"
-            name="email"
-            value={state.email}
+            placeholder="Enter your username"
+            name="username"
+            value={state.username}
             onChange={handleChange}
           />
         </div>

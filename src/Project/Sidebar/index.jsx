@@ -42,6 +42,7 @@ const ProjectSidebar = ({ project }) => {
       {renderLinkItem(match, 'Pages', 'page')}
       {renderLinkItem(match, 'Reports', 'reports')}
       {renderLinkItem(match, 'Components', 'component')}
+      {renderLinkItem(match, 'Grantt', 'component', '/grantt')}
     </Sidebar>
   );
 };
