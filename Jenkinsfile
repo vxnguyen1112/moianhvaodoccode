@@ -5,19 +5,19 @@ pipeline {
     DOCKER_IMAGE = " PBL6/FE"
   }
 
-  stages {
-    stage("Test") {
-      agent {
-          docker {
-            image 'node:16-alpine'
-            args '-u 0:0 -v /tmp:/root/.cache'
-          }
-      }
-      steps {
-        sh 'npm install'
-        sh './test.sh'
-      }
-    }
+  // stages {
+  //   stage("Test") {
+  //     agent {
+  //         docker {
+  //           image 'node:16-alpine'
+  //           args '-u 0:0 -v /tmp:/root/.cache'
+  //         }
+  //     }
+  //     steps {
+  //       sh 'npm install'
+  //       sh './test.sh'
+  //     }
+  //   }
 
     stage("build") {
       agent { node {label 'master'}}
