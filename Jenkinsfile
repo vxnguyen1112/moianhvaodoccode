@@ -2,7 +2,7 @@ pipeline {
 
   agent none
   environment {
-    DOCKER_IMAGE = " PBL6/FE"
+    DOCKER_IMAGE = " pbl6/fe"
   }
 
   stages {
@@ -20,7 +20,7 @@ pipeline {
     // }
 
     stage("build") {
-      agent { node {label 'master'}}
+      agent { node {label 'Built-in'}}
       environment {
         DOCKER_TAG="${GIT_BRANCH.tokenize('/').pop()}-${GIT_COMMIT.substring(0,7)}"
       }
