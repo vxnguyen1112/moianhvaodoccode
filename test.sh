@@ -1,4 +1,4 @@
-echo 'The following "npm" command (if executed) in  stalls the "cross-env"'
+echo 'The following "npm" command (if executed) install the "cross-env"'
 echo 'dependency into the local "node_modules" directory, which will ultimately'
 echo 'be stored in the Jenkins home directory. As described in'
 echo 'https://docs.npmjs.com/cli/install, the "--save-dev" flag causes the'
