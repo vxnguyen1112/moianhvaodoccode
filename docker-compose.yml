@@ -3,4 +3,4 @@ services:
   mywebsite:
     image: PBL6/FE:latest
     ports:
-      - "8080:80"
+      - "3000:80"
