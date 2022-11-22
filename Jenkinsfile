@@ -1,7 +1,7 @@
 pipeline {
     agent {
         docker {
-            image 'node:lts-buster-slim'
+            image 'node:16-alpine'
             args '-p 3000:3000'
         }
     }
@@ -16,14 +16,14 @@ pipeline {
         }
         stage('Test') {
             steps {
-                sh 'test.sh'
+                sh './test.sh'
             }
         }
         stage('Deliver') {
             steps {
-                sh 'deploy.sh'
+                sh './deploy.sh'
                 input message: 'Finished using the web site? (Click "Proceed" to continue)'
-                sh 'kill.sh'
+                sh './kill.sh'
             }
         }
     }
