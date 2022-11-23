@@ -5,19 +5,20 @@ pipeline {
     DOCKER_IMAGE = " vxnguyen1112/pbl6"
   }
 
-  // stages {
-  //   stage("Test") {
-  //     agent {
-  //         docker {
-  //           image 'node:16-alpine'
-  //           args '-u 0:0 -v /tmp:/root/.cache'
-  //         }
-  //     }
-  //     steps {
-  //       sh "npm install"
-  //       sh "./test.sh"
-  //     }
-  //   }
+  stages {
+    // stage("Test") {
+    //   agent {
+    //       docker {
+    //         image 'node:16-alpine'
+    //         evn CYPRESS_CACHE_FOLDER=/root/.cache/Cypress
+    //         args '-u 0:0 -v /tmp:/root/.cache'
+    //       }
+    //   }
+    //   steps {
+    //     sh "npm install"
+    //     sh "./test.sh"
+    //   }
+    // }
 
     stage("build") {
       agent { node {label 'master'}}
@@ -47,6 +48,7 @@ pipeline {
                 sh "./deploy.sh"
             }  
   } 
+  }
   post {
     success {
       echo "SUCCESSFUL"
