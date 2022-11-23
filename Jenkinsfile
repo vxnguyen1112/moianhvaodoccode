@@ -10,8 +10,7 @@ pipeline {
       agent {
           docker {
             image 'node:16-alpine'
-            env CYPRESS_CACHE_FOLDER=/app/.cache
-            args '-u 0:0 -v /tmp:/root/.cache'
+            args '-u 0:0 -v /tmp:/app/.cache'
           }
       }
       steps {
