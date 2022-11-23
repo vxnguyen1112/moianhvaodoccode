@@ -1,6 +1,6 @@
 pipeline {
 
-  agent none
+  agent any
   environment {
     DOCKER_IMAGE = " vxnguyen1112/pbl6"
   }
