@@ -6,19 +6,19 @@ pipeline {
   }
 
   stages {
-    // stage("Test") {
-    //   agent {
-    //       docker {
-    //         image 'node:16-alpine'
-    //         evn CYPRESS_CACHE_FOLDER=/root/.cache/Cypress
-    //         args '-u 0:0 -v /tmp:/root/.cache'
-    //       }
-    //   }
-    //   steps {
-    //     sh "npm install"
-    //     sh "./test.sh"
-    //   }
-    // }
+    stage("Test") {
+      agent {
+          docker {
+            image 'node:16-alpine'
+            env CYPRESS_CACHE_FOLDER=/app/.cache
+            args '-u 0:0 -v /tmp:/root/.cache'
+          }
+      }
+      steps {
+        sh "npm install"
+        sh "./test.sh"
+      }
+    }
 
     stage("build") {
       agent { node {label 'master'}}
@@ -44,6 +44,7 @@ pipeline {
     }
  
   stage("deploy") {
+     agent { node {label 'master'}}
      steps {
                 sh "./deploy.sh"
             }  
