@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { ProjectCategory, ProjectCategoryCopy } from 'shared/constants/projects';
-import toast from 'shared/utils/toast';
-import useApi from 'shared/hooks/api';
-import { Form, Breadcrumbs } from 'shared/components';
+import { ProjectCategory, ProjectCategoryCopy } from 'constants/projects';
+import { toast } from 'react-project-management';
+import useApi from 'hooks/api';
+import { Form, Breadcrumbs } from 'components';
 
 import { FormCont, FormHeading, FormElement, ActionButton } from './Styles';
 

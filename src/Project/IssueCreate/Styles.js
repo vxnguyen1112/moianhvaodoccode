@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-import { color, font } from 'shared/utils/styles';
-import { Button, Form } from 'shared/components';
+import { color, font } from 'react-project-management';
+import { Button, Form } from 'components';
 
 export const FormElement = styled(Form.Element)`
   padding: 25px 40px 35px;

@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { NavLink, useRouteMatch } from 'react-router-dom';
 
-import { ProjectCategoryCopy } from 'shared/constants/projects';
-import { Icon, ProjectAvatar } from 'shared/components';
+import { ProjectCategoryCopy } from 'constants/projects';
+import { Icon, ProjectAvatar } from 'components';
 
 import {
   Sidebar,
@@ -37,16 +37,15 @@ const ProjectSidebar = ({ project }) => {
       {renderLinkItem(match, 'Board', 'board', '/board')}
       {renderLinkItem(match, 'Project settings', 'settings', '/settings')}
       <Divider />
-      {renderLinkItem(match, 'Releases', 'shipping')}
+      {/* {renderLinkItem(match, 'Releases', 'shipping')}
       {renderLinkItem(match, 'Issues and filters', 'issues')}
       {renderLinkItem(match, 'Pages', 'page')}
       {renderLinkItem(match, 'Reports', 'reports')}
-      {renderLinkItem(match, 'Components', 'component')}
-      {renderLinkItem(match, 'Grantt', 'shipping', '/grantt')}
-      {renderLinkItem(match, 'Burndown chart', 'calendar', '/burndown-chart')}
+      {renderLinkItem(match, 'Components', 'component')} */}
       {renderLinkItem(match, 'Project create', 'board', '/project-create')}
       {renderLinkItem(match, 'Backlog', 'page', '/backlog')}
-      
+      {renderLinkItem(match, 'Grantt', 'shipping', '/grantt')}
+      {renderLinkItem(match, 'Burndown chart', 'calendar', '/burndown-chart')}
     </Sidebar>
   );
 };

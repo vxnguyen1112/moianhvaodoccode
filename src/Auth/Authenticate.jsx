@@ -1,10 +1,10 @@
 import React, { useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
 
-import api from 'shared/utils/api';
-import toast from 'shared/utils/toast';
-import { getStoredAuthToken, storeAuthToken } from 'shared/utils/authToken';
-import { PageLoader } from 'shared/components';
+import api from 'Services/api';
+import { toast } from 'react-project-management';
+import { getStoredAuthToken, storeAuthToken } from 'react-project-management';
+import { PageLoader } from 'components';
 
 const Authenticate = () => {
   const history = useHistory();

@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
 
-import { font, sizes, color, mixin, zIndexValues } from 'shared/utils/styles';
-import { Logo } from 'shared/components';
+import { font, sizes, color, mixin, zIndexValues } from 'react-project-management';
+import { Logo } from 'components';
 
 export const NavLeft = styled.aside`
   z-index: ${zIndexValues.navLeft};

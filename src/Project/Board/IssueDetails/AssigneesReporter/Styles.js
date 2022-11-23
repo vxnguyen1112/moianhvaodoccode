@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import { color, font, mixin } from 'shared/utils/styles';
+import { color, font, mixin } from 'react-project-management';
 
 export const User = styled.div`
   display: flex;

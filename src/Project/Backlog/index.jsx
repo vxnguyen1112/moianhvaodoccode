@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
-import Select from 'react-select';
-import { Breadcrumbs } from 'shared/components';
-import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import React, { useEffect, useState } from 'react';
+import { Button, Breadcrumbs } from 'components';
+import { DragDropContext } from 'react-beautiful-dnd';
 import { FormHeading } from '../ProjectSettings/Styles';
-import "./Backlog.css";
+import BoardSprint from './Board/BoardSprint';
+import BoardBacklog from './Board/BoardBacklog';
 
 // fake data generator
 const getItems = (count, offset = 0) =>
@@ -12,39 +12,70 @@ const getItems = (count, offset = 0) =>
         content: `item ${k + offset}`
     }));
 
-const sprint = [
+const boards = [
     {
-        id: '1',
-        content: 'Thiết kế database',
+        id: 'droppable1',
+        isBacklog: true,
+        status: 1,
+        issues:  [
+            {
+                id: '1',
+                content: 'Thiết kế database',
+            },
+            {
+                id: '2',
+                content: 'Chuẩn bị môi trường phát triển',
+            },
+            {
+                id: '3',
+                content: 'Thiết kế giao diện đăng kí',
+            },
+            {
+                id: '4',
+                content: 'Thiết kế giao diện trang chủ',
+            },
+        ]
     },
     {
-        id: '2',
-        content: 'Chuẩn bị môi trường phát triển',
+        id: 'droppable2',
+        isBacklog: false,
+        status: 1,
+        issues: [
+            {
+                id: '5',
+                content: 'Code giao diện trang chủ',
+            },
+            {
+                id: '6',
+                content: 'Code giao diện đăng kí',
+            },
+            {
+                id: '7',
+                content: 'Thiết kê giao diện trang admin',
+            },
+        ]
     },
     {
-        id: '3',
-        content: 'Thiết kế giao diện đăng kí',
-    },
-    {
-        id: '4',
-        content: 'Thiết kế giao diện trang chủ',
-    },
+        id: 'droppable3',
+        isBacklog: false,
+        status: 1,
+        issues: [
+            {
+                id: '8',
+                content: 'Code giao diện trang tganh toán',
+            },
+            {
+                id: '9',
+                content: 'Code giao diện xem chi tiết đơn hàng',
+            },
+            {
+                id: '10',
+                content: 'Thiết kê giao diện trang thanh toán',
+            },
+        ]
+    }
 ]
 
-const backlog = [
-    {
-        id: '5',
-        content: 'Code giao diện trang chủ',
-    },
-    {
-        id: '6',
-        content: 'Code giao diện đăng kí',
-    },
-    {
-        id: '7',
-        content: 'Thiết kê giao diện trang admin',
-    },
-]
 
 // a little function to help us with reordering the result
 const reorder = (list, startIndex, endIndex) => {
@@ -94,31 +125,15 @@ const getListStyle = (isDraggingOver) => ({
 });
 
 const options = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' }
-  ]
-  
+    { value: 'task', label: 'Task' },
+    { value: 'bug', label: 'Bug' },
+    { value: 'error', label: 'Error' }
+]
 
 const Backlog = () => {
-    const [state, setState] = useState({
-        items: sprint, 
-        selected: backlog,
-    });
+    const [state, setState] = useState(boards);
 
-    const [isCreateIssue, setIsCreateIssue] = useState(false)
-
-    /**
-     * A semi-generic way to handle multiple lists. Matches
-     * the IDs of the droppable container to the names of the
-     * source arrays stored in the state.
-     */
-    const id2List = {
-        droppable: 'items',
-        droppable2: 'selected'
-    };
-
-    const getList = (id) => state[id2List[id]];
+    const getList = (id) => boards.filter(board => board.id === id);
 
     const onDragEnd = (result) => {
         const { source, destination } = result;
@@ -135,21 +150,28 @@ const Backlog = () => {
                 destination.index
             );
 
-            if (source.droppableId === 'droppable') {
-                setState({
-                    items: items,
-                    selected: [...state.selected]
-                });
-            }
+            setState(prev => prev.forEach(board => {
+                if (board.id === source.droppableId) {
+                    board = [...items];
+                }
 
-            if (source.droppableId === 'droppable2') {
-                setState({
-                    items: [...state.items],
-                    selected: items
-                });
-            }
+                return board;
+            }))
 
-            
+            // if (source.droppableId === 'droppable') {
+            //     setState({
+            //         items: items,
+            //         selected: [...state.selected]
+            //     });
+            // }
+
+            // if (source.droppableId === 'droppable2') {
+            //     setState({
+            //         items: [...state.items],
+            //         selected: items
+            //     });
+            // }
+
         } else {
             const result = move(
                 getList(source.droppableId),
@@ -158,17 +180,25 @@ const Backlog = () => {
                 destination
             );
 
-            setState({
-                items: result.droppable,
-                selected: result.droppable2
-            });
+            setState(prev => prev.forEach(board => {
+                if (board.id === source.droppableId) {
+                    board = [...result[source.droppableId]];
+                }
+
+                if (board.id === destination.droppableId) {
+                    board = [...result[destination.droppableId]]
+                }
+
+                return board;
+            }))
+
+            // setState({
+            //     items: result.droppable,
+            //     selected: result.droppable2
+            // });
         }
     };
 
-    
-
-    // Normally you would want to split things out into separate components.
-    // But in this example everything is just done in one place for simplicity
     return (
         <div
             style={{
@@ -182,7 +212,7 @@ const Backlog = () => {
             <FormHeading>Backlog</FormHeading>
 
             <DragDropContext onDragEnd={onDragEnd}>
-                <Droppable droppableId="droppable">
+                {/* <Droppable droppableId="droppable">
                     {(provided, snapshot) => (
                         <div
                             ref={provided.innerRef}
@@ -194,7 +224,11 @@ const Backlog = () => {
                                     className="collopse"
                                 >
                                     Sprint 1
+                                    <Button type="submit" variant="primary" className="btn btnBoard">
+                                        Start sprint
+                                    </Button>
                                 </summary>
+                                
 
                                 {state.items.map((item, index) => (
                                     <Draggable
@@ -220,77 +254,75 @@ const Backlog = () => {
                                     className="createIssueArea"
                                 >
                                     <span 
-                                        className={isCreateIssue ? 'hidden' : undefined}
-                                        onClick={() => setIsCreateIssue(true)}
+                                        className={isCreateIssueSprint ? 'hidden' : undefined}
+                                        onClick={() => setIsCreateIssueSprint(true)}
                                     >
                                         + Create issue
                                     </span>
-                                    { isCreateIssue &&
+                                    { isCreateIssueSprint &&
                                         <div
                                             className="createIssueGroupInput"
                                         >
                                             <div
-                                                className="createIssueSelect"
+                                                className="createIssueGroupInputWrapper"
                                             >
-                                                <Select options={options} />
+                                                <div
+                                                    className="createIssueSelect"
+                                                >
+                                                    <Select options={options} />
+                                                </div>
+                                                <input 
+                                                    type="text"
+                                                    className="createIssueInput" 
+                                                />
+                                            </div> 
+                                            <div
+                                                className="createIssueGroupButton"
+                                            >
+                                                <Button type="submit" variant="primary" className="btn">
+                                                    Create Issue
+                                                </Button>
+                                                <Button 
+                                                    type="button" 
+                                                    variant="empty" 
+                                                    className="btn"
+                                                    onClick={() => setIsCreateIssueSprint(false)}
+                                                >
+                                                    Cancel
+                                                </Button>
                                             </div>
-                                            <input 
-                                                type="text"
-                                                className="createIssueInput" 
-                                            />
-                                        </div> }
+                                        </div>}
                                 </div>
                             </details>
                             {provided.placeholder}
                         </div>
                     )}
-                </Droppable>
-                <div
-                    style={{
-                        width: '100%',
-                        height: 50
-                    }}
-                >
-                </div>
-                <Droppable droppableId="droppable2">
-                    {(provided, snapshot) => (
-                        <div
-                            ref={provided.innerRef}
-                            style={getListStyle(snapshot.isDraggingOver)}
-                            className="droppable"
-                            >
+                </Droppable> */}
+                { boards.map(board => {
+                    if(board.isBacklog) {
+                        return (
+                            <BoardBacklog
+                                key={board.id}
+                                droppableId={board.id}
+                                boardState={board.issues}
+                                getListStyle={getListStyle}
+                                getItemStyle={getItemStyle}
+                            />
+                        )
+                    } else {
+                        return (
+                            <BoardSprint
+                                key={board.id}
+                                droppableId={board.id}
+                                boardState={board.issues}
+                                getListStyle={getListStyle}
+                                getItemStyle={getItemStyle}
+                            />
+                        )
+                    }
+                })}
+                
 
-                            <details open>
-                                <summary
-                                        className="collopse"
-                                    >
-                                    Backlog
-                                </summary>
-                                {state.selected.map((item, index) => (
-                                    <Draggable
-                                        key={item.id}
-                                        draggableId={item.id}
-                                        index={index}>
-                                        {(provided, snapshot) => (
-                                            <div
-                                                ref={provided.innerRef}
-                                                {...provided.draggableProps}
-                                                {...provided.dragHandleProps}
-                                                style={getItemStyle(
-                                                    snapshot.isDragging,
-                                                    provided.draggableProps.style
-                                                )}>
-                                                {item.content}
-                                            </div>
-                                        )}
-                                    </Draggable>
-                                ))}
-                            </details>
-                            
-                            {provided.placeholder}
-                        </div>
-                    )}
-                </Droppable>
             </DragDropContext>
         </div>
     );

@@ -5,7 +5,7 @@ import history from 'browserHistory';
 import Project from 'Project';
 import Login from 'Login/Login';
 // import Authenticate from 'Auth/Authenticate';
-import PageError from 'shared/components/PageError';
+import PageError from 'components/PageError';
 
 const Routes = () => (
   <Router history={history}>

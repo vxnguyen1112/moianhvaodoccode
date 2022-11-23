@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import { formatDateTimeConversational } from 'shared/utils/dateTime';
+import { formatDateTimeConversational } from 'react-project-management';
 
 import { Dates } from './Styles';
 

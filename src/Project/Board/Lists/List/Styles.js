@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { color, font, mixin } from 'shared/utils/styles';
+import { color, font, mixin } from 'react-project-management';
 
 export const List = styled.div`
   display: flex;

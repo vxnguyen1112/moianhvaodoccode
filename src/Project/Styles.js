@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { sizes } from 'shared/utils/styles';
+import { sizes } from 'react-project-management';
 
 const paddingLeft = sizes.appNavBarLeftWidth + sizes.secondarySideBarWidth + 40;
 

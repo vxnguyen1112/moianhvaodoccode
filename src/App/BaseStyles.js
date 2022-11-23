@@ -1,6 +1,6 @@
 import { createGlobalStyle } from 'styled-components';
 
-import { color, font, mixin } from 'shared/utils/styles';
+import { color, font, mixin } from 'react-project-management';
 
 export default createGlobalStyle`
   html, body, #root {

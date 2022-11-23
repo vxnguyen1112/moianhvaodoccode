@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-import { color, font } from 'shared/utils/styles';
-import { Icon } from 'shared/components';
+import { color, font } from 'react-project-management';
+import { Icon } from 'components';
 
 export const TrackingWidget = styled.div`
   display: flex;

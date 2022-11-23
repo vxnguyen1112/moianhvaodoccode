@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { color, font } from 'shared/utils/styles';
+import { color, font } from 'react-project-management';
 
 export const Content = styled.div`
   display: flex;

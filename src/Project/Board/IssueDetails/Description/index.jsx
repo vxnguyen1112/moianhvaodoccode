@@ -1,8 +1,8 @@
 import React, { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 
-import { getTextContentsFromHtmlString } from 'shared/utils/browser';
-import { TextEditor, TextEditedContent, Button } from 'shared/components';
+import { getTextContentsFromHtmlString } from 'react-project-management';
+import { TextEditor, TextEditedContent, Button } from 'components';
 
 import { Title, EmptyLabel, Actions } from './Styles';
 

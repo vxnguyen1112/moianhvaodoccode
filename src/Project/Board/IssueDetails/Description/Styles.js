@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { color, font, mixin } from 'shared/utils/styles';
+import { color, font, mixin } from 'react-project-management';
 
 export const Title = styled.div`
   padding: 20px 0 6px;

@@ -7,11 +7,11 @@ import {
   IssuePriority,
   IssueTypeCopy,
   IssuePriorityCopy,
-} from 'shared/constants/issues';
-import toast from 'shared/utils/toast';
-import useApi from 'shared/hooks/api';
-import useCurrentUser from 'shared/hooks/currentUser';
-import { Form, IssueTypeIcon, Icon, Avatar, IssuePriorityIcon } from 'shared/components';
+} from 'constants/issues';
+import { toast } from 'react-project-management';
+import useApi from 'hooks/api';
+import useCurrentUser from 'hooks/currentUser';
+import { Form, IssueTypeIcon, Icon, Avatar, IssuePriorityIcon } from 'components';
 
 import {
   FormHeading,

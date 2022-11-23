@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
-import { color, font, mixin, zIndexValues } from 'shared/utils/styles';
-import { Icon } from 'shared/components';
+import { color, font, mixin, zIndexValues } from 'react-project-management';
+import { Icon } from 'components';
 
 export const Container = styled.div`
   z-index: ${zIndexValues.modal + 1};

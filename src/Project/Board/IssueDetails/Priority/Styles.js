@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import { color, font } from 'shared/utils/styles';
+import { color, font } from 'react-project-management';
 
 export const Priority = styled.div`
   display: flex;

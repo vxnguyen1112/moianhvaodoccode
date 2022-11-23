@@ -1,10 +1,10 @@
 import React from 'react';
 import { Route, Redirect, useRouteMatch, useHistory } from 'react-router-dom';
 
-import useApi from 'shared/hooks/api';
-import { updateArrayItemById } from 'shared/utils/javascript';
-import { createQueryParamModalHelpers } from 'shared/utils/queryParamModal';
-import { Modal } from 'shared/components';
+import useApi from 'hooks/api';
+import { updateArrayItemById } from 'react-project-management';
+import { createQueryParamModalHelpers } from 'react-project-management';
+import { Modal } from 'components';
 
 import NavbarLeft from './NavbarLeft';
 import Sidebar from './Sidebar';

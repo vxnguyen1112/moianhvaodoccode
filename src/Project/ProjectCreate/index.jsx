@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Form, Breadcrumbs } from 'shared/components';
+import { Form, Breadcrumbs } from 'components';
 
 import { FormCont, FormHeading, FormElement, ActionButton } from '../ProjectSettings/Styles';
 

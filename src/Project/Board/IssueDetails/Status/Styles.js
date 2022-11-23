@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components';
 
-import { issueStatusColors, issueStatusBackgroundColors, mixin } from 'shared/utils/styles';
+import { issueStatusColors, issueStatusBackgroundColors, mixin } from 'react-project-management';
 
 export const Status = styled.div`
   text-transform: uppercase;

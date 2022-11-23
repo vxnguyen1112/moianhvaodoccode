@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
-import { color, font, mixin } from 'shared/utils/styles';
-import { Avatar } from 'shared/components';
+import { color, font, mixin } from 'react-project-management';
+import { Avatar } from 'components';
 
 export const Comment = styled.div`
   position: relative;
