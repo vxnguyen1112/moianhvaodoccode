@@ -5,19 +5,19 @@ pipeline {
     DOCKER_IMAGE = " vxnguyen1112/pbl6"
   }
 
-  stages {
-    stage("Test") {
-      agent {
-          docker {
-            image 'node:16-alpine'
-            args '-u 0:0 -v /tmp:/root/.cache'
-          }
-      }
-      steps {
-        sh "npm install"
-        sh "./test.sh"
-      }
-    }
+  // stages {
+  //   stage("Test") {
+  //     agent {
+  //         docker {
+  //           image 'node:16-alpine'
+  //           args '-u 0:0 -v /tmp:/root/.cache'
+  //         }
+  //     }
+  //     steps {
+  //       sh "npm install"
+  //       sh "./test.sh"
+  //     }
+  //   }
 
     stage("build") {
       agent { node {label 'master'}}
@@ -38,6 +38,11 @@ pipeline {
         sh "docker image rm ${DOCKER_IMAGE}:${DOCKER_TAG}"
         sh "docker image rm ${DOCKER_IMAGE}:latest"
       }
+  
+    stage("deploy") {
+     steps {
+                sh "./deploy.sh"
+            }  
     }
   }
 
