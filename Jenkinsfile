@@ -15,7 +15,7 @@ pipeline {
       }
       steps {
         sh "npm install"
-        sh "./test.sh"
+        sh "npm run test:jest"
       }
     }
 
