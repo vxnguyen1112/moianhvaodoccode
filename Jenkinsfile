@@ -44,9 +44,10 @@ pipeline {
     // }
  
   stage("deploy") {
-     agent { node {label 'master'}}
      steps {
-                sh "./deploy.sh"
+               sshagent(['ssh_key']) {
+                 sh "ssh -o StrictHostKeyChecking=no -l root 146.190.104.63 './deploy.sh'"
+                 }  
             }  
   } 
   }
