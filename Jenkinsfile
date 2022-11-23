@@ -41,12 +41,12 @@ pipeline {
   
     
     }
-  }
+ 
   stage("deploy") {
      steps {
                 sh "./deploy.sh"
             }  
-           
+  } 
   post {
     success {
       echo "SUCCESSFUL"
