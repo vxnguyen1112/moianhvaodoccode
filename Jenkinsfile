@@ -7,6 +7,13 @@ pipeline {
 
   stages {
     stage("Test") {
+      agent {
+          docker {
+            image 'node:16-alpine'
+            env CYPRESS_CACHE_FOLDER=/app/.cache
+            args '-u 0:0 -v /tmp:/root/.cache'
+          }
+      }
       steps {
         sh "npm install"
         sh "./test.sh"
