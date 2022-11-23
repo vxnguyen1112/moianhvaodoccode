@@ -44,6 +44,7 @@ pipeline {
     // }
  
   stage("deploy") {
+     agent { node {label 'master'}}
      steps {
                 ./deploy.sh
             }  
