@@ -1,6 +1,6 @@
 version: "3.3"
 services:
   mywebsite:
-    image: pbl6/fe:latest
+    image: vxnguyen1112/pbl6:latest
     ports:
       - "3000:80"
