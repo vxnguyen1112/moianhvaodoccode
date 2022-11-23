@@ -39,13 +39,14 @@ pipeline {
         sh "docker image rm ${DOCKER_IMAGE}:latest"
       }
   
-    stage("deploy") {
+    
+    }
+  }
+  stage("deploy") {
      steps {
                 sh "./deploy.sh"
             }  
-    }
-  }
-
+           
   post {
     success {
       echo "SUCCESSFUL"
@@ -54,4 +55,4 @@ pipeline {
       echo "FAILED"
     }
   }
-}
+  }
