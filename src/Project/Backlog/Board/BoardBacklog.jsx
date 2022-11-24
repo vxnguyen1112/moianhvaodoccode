@@ -1,8 +1,12 @@
 import React, { useState, useEffect } from 'react';
+import { uuid } from 'uuidv4';
 import Select from 'react-select';
 import { Button } from 'components';
-import Divider from '../Divider';
 import { Droppable, Draggable } from 'react-beautiful-dnd';
+import { addIssue } from 'store/reducers/backlogSlice';
+import { useDispatch } from 'react-redux';
+import { toast } from 'react-project-management';
+import Divider from '../Divider';
 import "./Board.css";
 
 const options = [
@@ -12,11 +16,31 @@ const options = [
 ]
 
 const BoardBacklog = (props) => {
+    const dispatch = useDispatch();
     const {droppableId, boardState, getListStyle, getItemStyle} = props;
     const [isCreateIssue, setIsCreateIssue] = useState(false);
+    const [issueContent, setIssueContent] = useState("")
+    const [selectedOption, setSelectedOption] = useState(options[0]);
+
+    const onCreateIssue = () => {
+        if (issueContent.trim() === "") {
+            toast.error('Vui lòng nhập tên issue');
+        } else {
+            dispatch(addIssue({
+                boardId: droppableId,
+                issue: {
+                    id: uuid(),
+                    content: issueContent,
+                    type: selectedOption.value
+                }
+            }))
+            setIsCreateIssue(false);
+        }
+        
+    }
 
     return (
-        <>
+        <React.Fragment>
             <Droppable droppableId={droppableId}>
                 {(provided, snapshot) => (
                     <div
@@ -25,9 +49,7 @@ const BoardBacklog = (props) => {
                         className="droppable">
 
                         <details open>
-                            <summary
-                                className="collopse"
-                            >
+                            <summary className="collopse">
                                 Backlog
                                 <Button type="submit" variant="primary" className="btn btnBoard">
                                     Create sprint
@@ -54,9 +76,7 @@ const BoardBacklog = (props) => {
                                 </Draggable>
                             ))}
 
-                            <div
-                                className="createIssueArea"
-                            >
+                            <div className="createIssueArea">
                                 <span 
                                     className={isCreateIssue ? 'hidden' : undefined}
                                     onClick={() => setIsCreateIssue(true)}
@@ -64,26 +84,27 @@ const BoardBacklog = (props) => {
                                     + Create issue
                                 </span>
                                 { isCreateIssue &&
-                                    <div
-                                        className="createIssueGroupInput"
-                                    >
-                                        <div
-                                            className="createIssueGroupInputWrapper"
-                                        >
-                                            <div
-                                                className="createIssueSelect"
-                                            >
-                                                <Select options={options} />
+                                    <div className="createIssueGroupInput">
+                                        <div className="createIssueGroupInputWrapper">
+                                            <div className="createIssueSelect">
+                                                <Select 
+                                                    defaultValue={selectedOption}
+                                                    onChange={setSelectedOption}
+                                                    options={options}/>
                                             </div>
                                             <input 
                                                 type="text"
+                                                value={issueContent}
+                                                onChange={(e) => setIssueContent(e.target.value)}
                                                 className="createIssueInput" 
                                             />
                                         </div> 
-                                        <div
-                                            className="createIssueGroupButton"
-                                        >
-                                            <Button type="submit" variant="primary" className="btn">
+                                        <div className="createIssueGroupButton">
+                                            <Button 
+                                                type="submit" 
+                                                variant="primary" 
+                                                className="btn"
+                                                onClick={onCreateIssue}>
                                                 Create Issue
                                             </Button>
                                             <Button 
@@ -104,7 +125,7 @@ const BoardBacklog = (props) => {
             </Droppable>
 
             <Divider/>
-        </>
+        </React.Fragment>
     );
 }
 

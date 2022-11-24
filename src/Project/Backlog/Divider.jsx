@@ -7,7 +7,7 @@ const Divider = () => {
                 width: '100%',
                 height: 50
             }}
-        ></div>
+        />
     )
 }
 
